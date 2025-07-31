@@ -5,6 +5,8 @@ import "./index.css";
 
 export const Pokemonn =()=>{
 const [pokemon,setPokemon]= useState([]);
+const [loading, setLoading]=useState(true);
+const [error, setError]= useState(null);
 
 const API = "https://pokeapi.co/api/v2/pokemon?limit=124";
 
@@ -20,15 +22,33 @@ const fetchPokemon = async()=>{
         });
         const detailedResponse = await Promise.all(detailedPokemonData);
         setPokemon(detailedResponse);
-
+        setLoading(false);
     } catch (error) {
-        console.log(error)
+        console.log(error);
+        setLoading(false);
+        setError(error);
+
     }
  };
 
  useEffect(()=>{
     fetchPokemon();
  },[]);
+
+ if (loading) {
+  return (<div>
+    <h1>Loading...</h1>
+  </div>
+ )};
+
+ if (error) {
+  return (
+  <div>
+    <h1>{error.message}</h1>
+  </div>
+ )};
+
+
 
 return (
   <>
