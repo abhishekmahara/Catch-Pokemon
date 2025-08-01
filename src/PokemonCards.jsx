@@ -20,6 +20,7 @@ export const PokemonCards = ({pokemonData})=>{
             </p>
              <p className="pokemon-info">
                 <span>Speed:</span>{pokemonData.stats[5].base_stat}
+               
             </p>
 
         </div >
@@ -33,7 +34,9 @@ export const PokemonCards = ({pokemonData})=>{
                 <span>Attack</span> 
             </div>
             <div className="pokemon-info">
-                <p>{pokemonData.abilities.map((abilityInfo)=>abilityInfo.ability.name)}</p>
+                <p>{pokemonData.abilities.map((abilityInfo)=>abilityInfo.ability.name)
+                    .slice(0, 1)
+                    .join(", ")}</p>
                 <span>Experience</span> 
             </div>
 
